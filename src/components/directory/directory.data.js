@@ -32,3 +32,5 @@ const SECTIONS_DATA = [
     linkUrl: 'shop/mens'
   }
 ];
+
+export default SECTIONS_DATA;

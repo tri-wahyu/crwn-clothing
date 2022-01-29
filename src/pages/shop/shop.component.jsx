@@ -24,12 +24,28 @@ class ShopePage extends React.Component {
     componentDidMount(){
         const { updateCollections } = this.props;
         const collectionRef = firestore.collection('collections');
+        // const url = "https://firestore.googleapis.com/v1/projects/crwn-clothing-99edc/databases/(default)/documents/collections";
 
-        collectionRef.onSnapshot(async snapshot => {
+        // fetch(url)
+        //   .then((response) => response.json())
+        //   .then((colections) => {
+        //     updateCollections(colections);
+        //     this.setState({ loading: false });
+        //   });
+
+        //Promise Pattern
+        collectionRef.get().then(snapshot => {
             const collectionsMap = convertCollectionSnapshotToMap(snapshot);
             updateCollections(collectionsMap);
             this.setState({ loading: false });
         })
+
+        //Observable Pattern
+        // collectionRef.onSnapshot(async (snapshot) => {
+        //   const collectionsMap = convertCollectionSnapshotToMap(snapshot);
+        //   updateCollections(collectionsMap);
+        //   this.setState({ loading: false });
+        // });
     }
 
     render () {

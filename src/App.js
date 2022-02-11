@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './App.css';
 
@@ -12,10 +12,9 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector';
 import CheckoutPage from './pages/checkout/checkout.component';
-import { createStructuredSelector } from 'reselect';
 
-const App = ({ currentUser }) => {
-
+const App = () => {
+  const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,13 +60,13 @@ const App = ({ currentUser }) => {
   );
 }
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
+// const mapStateToProps = createStructuredSelector({
+//   currentUser: selectCurrentUser,
   // collectionsArray: selectCollectionsForPreview
-});
+// });
 
 // const mapDispatchToProps = dispatch => ({
 //   setCurrentUser: user => dispatch(setCurrentUser(user))
 // });
 
-export default connect(mapStateToProps)(App);
+export default App;
